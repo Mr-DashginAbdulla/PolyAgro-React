@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        .switch {position: relative; display: inline-block; width: 48px; height: 24px;}
+        .switch input {opacity: 0; width: 0; height: 0;}
+        .slider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px;}
+        .slider:before {position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;}
+        input:checked + .slider {background-color: rgb(87, 181, 231);}
+        input:checked + .slider:before {transform: translateX(24px);}
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(87, 181, 231)',
+                        secondary: '#6B7280'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex min-h-screen">
+        <aside class="w-64 border-r bg-white">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-gray-900">Ayarlar</h1>
+                <p class="text-sm text-gray-500 mt-1">Hesap ve sistem ayarlarınızı yönetin</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#profile" class="flex items-center px-6 py-3 text-gray-700 bg-gray-50 border-l-4 border-primary">
+                    <i class="ri-user-line w-5 h-5 flex items-center justify-center"></i>
+                    <span class="ml-3">Profil</span>
+                </a>
+                <a href="#notifications" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50">
+                    <i class="ri-notification-line w-5 h-5 flex items-center justify-center"></i>
+                    <span class="ml-3">Bildirimler</span>
+                </a>
+                <a href="#system" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50">
+                    <i class="ri-settings-line w-5 h-5 flex items-center justify-center"></i>
+                    <span class="ml-3">Sistem</span>
+                </a>
+                <a href="#security" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50">
+                    <i class="ri-shield-line w-5 h-5 flex items-center justify-center"></i>
+                    <span class="ml-3">Güvenlik</span>
+                </a>
+                <a href="#appearance" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50">
+                    <i class="ri-palette-line w-5 h-5 flex items-center justify-center"></i>
+                    <span class="ml-3">Görünüm</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-8">
+            <section id="profile" class="max-w-4xl">
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-6">Profil Bilgileri</h2>
+                    <div class="flex items-start">
+                        <div class="relative">
+                            <div class="w-24 h-24 rounded-full bg-gray-200 overflow-hidden">
+                                <img src="https://public.readdy.ai/ai/img_res/98cbc3762057931301645377b0e92d72.jpg" 
+                                     class="w-full h-full object-cover" alt="Profil">
+                            </div>
+                            <button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg !rounded-button">
+                                <i class="ri-camera-line w-4 h-4 flex items-center justify-center"></i>
+                            </button>
+                        </div>
+                        <div class="ml-8 flex-1">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Ad</label>
+                                    <input type="text" value="Ahmet" class="w-full p-2 border rounded !rounded-button">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Soyad</label>
+                                    <input type="text" value="Yılmaz" class="w-full p-2 border rounded !rounded-button">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+                                    <div class="flex">
+                                        <input type="email" value="ahmet.yilmaz@email.com" readonly class="flex-1 p-2 bg-gray-50 border rounded-l !rounded-button">
+                                        <button class="px-4 bg-primary text-white rounded-r !rounded-button whitespace-nowrap">Doğrula</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                                    <div class="flex">
+                                        <input type="tel" value="+90 555 123 4567" class="flex-1 p-2 border rounded-l !rounded-button">
+                                        <button class="px-4 bg-primary text-white rounded-r !rounded-button whitespace-nowrap">SMS Gönder</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-6">Bildirim Ayarları</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium">Sistem Bildirimleri</h3>
+                                <p class="text-sm text-gray-500">Otomatik sulama ve sıcaklık değişimi bildirimleri</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium">E-posta Bildirimleri</h3>
+                                <p class="text-sm text-gray-500">Günlük ve haftalık raporlar</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium">Mobil Bildirimler</h3>
+                                <p class="text-sm text-gray-500">Anlık uyarılar ve hatırlatmalar</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-xl font-semibold mb-6">Güvenlik Ayarları</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-medium mb-4">Şifre Değiştir</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="password" placeholder="Mevcut şifre" class="w-full p-2 border rounded !rounded-button">
+                                <input type="password" placeholder="Yeni şifre" class="w-full p-2 border rounded !rounded-button">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium mb-4">İki Faktörlü Doğrulama</h3>
+                            <div class="flex items-center">
+                                <label class="switch mr-4">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="text-sm text-gray-500">SMS ile doğrulama aktif</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-semibold mb-6">Görünüm Ayarları</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Dil</label>
+                            <select class="w-full p-2 border rounded !rounded-button pr-8">
+                                <option>Türkçe</option>
+                                <option>English</option>
+                                <option>Deutsch</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tema</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="theme" checked class="mr-2">
+                                    <span>Açık</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="theme" class="mr-2">
+                                    <span>Koyu</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                document.querySelectorAll('nav a').forEach(a => {
+                    a.classList.remove('bg-gray-50', 'border-l-4', 'border-primary');
+                });
+                this.classList.add('bg-gray-50', 'border-l-4', 'border-primary');
+            });
+        });
+    </script>
+</body>
+</html>

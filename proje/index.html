@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PolyAgro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#22c55e",
+                        secondary: "#86efac",
+                    },
+                    borderRadius: {
+                        button: "8px"
+                    },
+                    fontFamily: {
+                        pacifico: ['Pacifico', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-cover bg-center" style="background-image: url('https://public.readdy.ai/ai/img_res/a5b9a49c768365ea163f7929b5d3aa13.jpg')">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-white bg-opacity-95 rounded-lg shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h1 class="font-pacifico text-3xl text-primary">PolyAgro</h1>
+            </div>
+            
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex rounded-full bg-gray-100 p-1">
+                    <button id="loginTab" class="px-6 py-2 rounded-full bg-white shadow-sm text-sm font-medium whitespace-nowrap">
+                        Daxil ol
+                    </button>
+                    <button id="registerTab" class="px-6 py-2 text-sm font-medium whitespace-nowrap">
+                        Qeydiyyat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Giriş Formu -->
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">E-poçt</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-mail-line text-gray-400"></i>
+                        </div>
+                        <input type="email" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="nümunə@email.com" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Şifrə</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-lock-line text-gray-400"></i>
+                        </div>
+                        <input type="password" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded">
+                        <label class="ml-2 block text-sm text-gray-700">Məni xatırla</label>
+                    </div>
+                    <a href="#" class="text-sm font-medium text-primary hover:text-primary/80">Şifrəmi unutdum</a>
+                </div>
+
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-button hover:bg-primary/90 transition-colors">
+                    Daxil ol
+                </button>
+
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">və ya ilə davam et</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button" class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-button hover:bg-gray-50">
+                        <i class="ri-google-fill text-[#4285F4] mr-2"></i>
+                        Google
+                    </button>
+                    <button type="button" class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-button hover:bg-gray-50">
+                        <i class="ri-github-fill mr-2"></i>
+                        GitHub
+                    </button>
+                </div>
+            </form>
+
+            <!-- Qeydiyyat Formu -->
+            <form id="registerForm" class="hidden space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ad Soyad</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-user-line text-gray-400"></i>
+                        </div>
+                        <input type="text" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="Ad Soyad" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">E-poçt</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-mail-line text-gray-400"></i>
+                        </div>
+                        <input type="email" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="nümunə@email.com" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Şifrə</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-lock-line text-gray-400"></i>
+                        </div>
+                        <input type="password" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Şifrə Təkrar</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="ri-lock-line text-gray-400"></i>
+                        </div>
+                        <input type="password" 
+                               class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm" 
+                               placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-button hover:bg-primary/90 transition-colors">
+                    Qeydiyyatdan keç
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bildiriş qutusu -->
+    <div id="toast" class="fixed top-4 right-4 hidden bg-white rounded-lg shadow-lg p-4 max-w-sm">
+        <div class="flex items-center">
+            <i class="ri-error-warning-line text-red-500 text-xl mr-3"></i>
+            <p id="toastMessage" class="text-sm text-gray-700"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akıllı Sera Kontrol Paneli</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#10B981',
+secondary: '#6B7280'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px', 
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.chart-container {
+width: 100%;
+height: 300px;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="flex min-h-screen">
+<aside class="w-64 bg-white shadow-lg fixed h-full">
+<div class="p-6">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/4caca88683cad389e7d4e705abf7409e.jpg"
+class="w-full h-full object-cover" alt="Profil">
+</div>
+<div>
+<h3 class="font-medium">Mehmet Yılmaz</h3>
+<p class="text-sm text-gray-500">Sera Yöneticisi</p>
+</div>
+</div>
+<nav class="space-y-2">
+<a href="#" class="flex items-center gap-3 p-3 text-primary bg-green-50 rounded">
+<i class="ri-dashboard-line"></i>
+<span>Kontrol Paneli</span>
+</a>
+<a href="#" class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded">
+<i class="ri-device-line"></i>
+<span>Cihaz Yönetimi</span>
+</a>
+<a href="#" class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded">
+<i class="ri-file-chart-line"></i>
+<span>Raporlar</span>
+</a>
+<a href="#" class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded">
+<i class="ri-settings-3-line"></i>
+<span>Ayarlar</span>
+</a>
+</nav>
+<div class="mt-8">
+<h4 class="text-sm font-medium mb-4">Bağlı Cihazlar</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-sm">Sera 1</span>
+</div>
+<span class="text-xs text-green-500">Aktif</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-sm">Sera 2</span>
+</div>
+<span class="text-xs text-green-500">Aktif</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-gray-300"></div>
+<span class="text-sm">Sera 3</span>
+</div>
+<span class="text-xs text-gray-500">Kapalı</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 p-8">
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+<i class="ri-plant-line text-primary text-xl"></i>
+</div>
+<div>
+<h2 class="font-medium">Sera 1</h2>
+<p class="text-sm text-gray-500">Son güncelleme: 5 dakika önce</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 bg-green-100 text-primary rounded-button flex items-center gap-2 hover:bg-green-200" onclick="refreshData()">
+<i class="ri-refresh-line"></i>
+<span>Yenile</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-button flex items-center gap-2 hover:bg-green-600" onclick="openSettings()">
+<i class="ri-settings-3-line"></i>
+<span>Ayarlar</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 mb-6">
+<div class="bg-white rounded-lg shadow p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-medium">Toprak Nemi</h3>
+<i class="ri-water-flash-line text-blue-500"></i>
+</div>
+<div class="text-3xl font-medium mb-2">65%</div>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-blue-500 h-2.5 rounded-full" style="width: 65%"></div>
+</div>
+<p class="text-sm text-gray-500 mt-2">Optimal seviyede</p>
+</div>
+<div class="bg-white rounded-lg shadow p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-medium">Sıcaklık</h3>
+<i class="ri-temp-hot-line text-orange-500"></i>
+</div>
+<div class="text-3xl font-medium mb-2">24°C</div>
+<div class="flex items-center gap-4 text-sm">
+<span class="text-gray-500">Min: 18°C</span>
+<span class="text-gray-500">Max: 28°C</span>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-medium">CO2 Seviyesi</h3>
+<i class="ri-cloud-line text-purple-500"></i>
+</div>
+<div class="text-3xl font-medium mb-2">450 PPM</div>
+<p class="text-sm text-green-500">Normal seviyede</p>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+<div class="flex gap-4 mb-6">
+<button class="px-4 py-2 bg-primary text-white rounded-button" onclick="updateChartPeriod('daily')">Günlük</button>
+<button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-button hover:bg-gray-200" onclick="updateChartPeriod('weekly')">Haftalık</button>
+<button class="px-4 py-2 bg-gray-100 text-gray-600 rounded-button hover:bg-gray-200" onclick="updateChartPeriod('monthly')">Aylık</button>
+</div>
+<div id="mainChart" class="chart-container"></div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-white rounded-lg shadow p-6">
+<h3 class="font-medium mb-4">Sulama Kontrolü</h3>
+<div class="flex items-center justify-between mb-4">
+<span class="text-gray-600">Otomatik Sulama</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input type="checkbox" class="sr-only peer" checked>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="mb-4">
+<label class="block text-sm text-gray-600 mb-2">Su Miktarı</label>
+<input type="range" min="0" max="100" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+</div>
+<button class="w-full px-4 py-2 bg-primary text-white rounded-button">Manuel Sulama Başlat</button>
+</div>
+<div class="bg-white rounded-lg shadow p-6">
+<h3 class="font-medium mb-4">Fan Kontrolü</h3>
+<div class="flex items-center justify-between mb-4">
+<span class="text-gray-600">Fan Durumu</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input type="checkbox" class="sr-only peer">
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="mb-4">
+<label class="block text-sm text-gray-600 mb-2">Fan Hızı</label>
+<input type="range" min="0" max="100" value="30" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+</div>
+<button class="w-full px-4 py-2 bg-primary text-white rounded-button">Fan Ayarlarını Kaydet</button>
+</div>
+</div>
+</main>
+</div>
+<script>
+const mockData = {
+temperature: [22, 21, 20, 23, 25, 26, 24, 23],
+humidity: [65, 63, 60, 68, 70, 72, 69, 67],
+co2: [440, 445, 450, 455, 460, 455, 450, 445]
+};
+
+const chart = echarts.init(document.getElementById('mainChart'));
+
+const option = {
+animation: false,
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#eee',
+borderWidth: 1,
+textStyle: {
+color: '#1f2937'
+}
+},
+legend: {
+data: ['Sıcaklık', 'Nem', 'CO2'],
+bottom: 0
+},
+grid: {
+top: 10,
+right: 30,
+bottom: 60,
+left: 60
+},
+xAxis: {
+type: 'category',
+data: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+axisLine: {
+lineStyle: {
+color: '#eee'
+}
+}
+},
+yAxis: [{
+type: 'value',
+name: 'Sıcaklık (°C) / Nem (%)',
+axisLine: {
+lineStyle: {
+color: '#eee'
+}
+},
+splitLine: {
+lineStyle: {
+color: '#eee'
+}
+}
+},
+{
+type: 'value',
+name: 'CO2 (PPM)',
+axisLine: {
+lineStyle: {
+color: '#eee'
+}
+},
+splitLine: {
+show: false
+}
+}],
+series: [{
+name: 'Sıcaklık',
+type: 'line',
+smooth: true,
+data: mockData.temperature,
+lineStyle: {
+color: 'rgba(87, 181, 231, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+offset: 0,
+color: 'rgba(87, 181, 231, 0.3)'
+}, {
+offset: 1,
+color: 'rgba(87, 181, 231, 0.1)'
+}])
+},
+symbol: 'none'
+},
+{
+name: 'Nem',
+type: 'line',
+smooth: true,
+data: mockData.humidity,
+lineStyle: {
+color: 'rgba(141, 211, 199, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+offset: 0,
+color: 'rgba(141, 211, 199, 0.3)'
+}, {
+offset: 1,
+color: 'rgba(141, 211, 199, 0.1)'
+}])
+},
+symbol: 'none'
+},
+{
+name: 'CO2',
+type: 'line',
+smooth: true,
+yAxisIndex: 1,
+data: mockData.co2,
+lineStyle: {
+color: 'rgba(251, 191, 114, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+offset: 0,
+color: 'rgba(251, 191, 114, 0.3)'
+}, {
+offset: 1,
+color: 'rgba(251, 191, 114, 0.1)'
+}])
+},
+symbol: 'none'
+}]
+};
+
+chart.setOption(option);
+window.addEventListener('resize', () => {
+chart.resize();
+});
+
+document.querySelector('input[type="checkbox"]').addEventListener('change', function(e) {
+const wateringControls = document.querySelector('input[type="range"]').parentElement;
+const manualButton = document.querySelector('button.w-full');
+if (this.checked) {
+wateringControls.style.opacity = '0.5';
+wateringControls.style.pointerEvents = 'none';
+manualButton.disabled = true;
+manualButton.style.opacity = '0.5';
+} else {
+wateringControls.style.opacity = '1';
+wateringControls.style.pointerEvents = 'auto';
+manualButton.disabled = false;
+manualButton.style.opacity = '1';
+}
+});
+
+document.querySelectorAll('input[type="range"]').forEach(range => {
+range.addEventListener('input', function(e) {
+const value = e.target.value;
+const parent = e.target.parentElement;
+const label = parent.querySelector('label');
+if (label.textContent.includes('Su')) {
+label.textContent = `Su Miktarı: ${value}%`;
+} else if (label.textContent.includes('Fan')) {
+label.textContent = `Fan Hızı: ${value}%`;
+}
+});
+});
+
+document.querySelector('button.w-full').addEventListener('click', function() {
+const waterAmount = document.querySelector('input[type="range"]').value;
+this.textContent = 'Sulama Devam Ediyor...';
+this.disabled = true;
+setTimeout(() => {
+this.textContent = 'Manuel Sulama Başlat';
+this.disabled = false;
+}, 3000);
+});
+
+const fanCheckbox = document.querySelectorAll('input[type="checkbox"]')[1];
+const fanSpeedRange = document.querySelectorAll('input[type="range"]')[1];
+const fanButton = document.querySelectorAll('button.w-full')[1];
+fanCheckbox.addEventListener('change', function() {
+if (this.checked) {
+fanSpeedRange.parentElement.style.opacity = '1';
+fanSpeedRange.disabled = false;
+} else {
+fanSpeedRange.parentElement.style.opacity = '0.5';
+fanSpeedRange.disabled = true;
+}
+});
+
+fanButton.addEventListener('click', function() {
+const fanStatus = fanCheckbox.checked;
+const fanSpeed = fanSpeedRange.value;
+this.textContent = 'Ayarlar Kaydediliyor...';
+this.disabled = true;
+setTimeout(() => {
+this.textContent = 'Fan Ayarlarını Kaydet';
+this.disabled = false;
+}, 1500);
+});
+</script>
+</body>
+</html>
