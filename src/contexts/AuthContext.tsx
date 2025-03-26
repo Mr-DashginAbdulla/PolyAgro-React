@@ -62,10 +62,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('emailInvalid');
     }
 
-    if (!validatePassword(password)) {
-      throw new Error('passwordInvalid');
-    }
-
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const user = users.find((u: any) => u.email === email);
 

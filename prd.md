@@ -56,25 +56,27 @@ PolyAgro, ağıllı sera cihazlarını idarə etmək üçün nəzərdə tutulmu�
 
 ### Mərhələ 1: Hazırlıq və Planlaşdırma
 - [x] PRD yaratma
-- [ ] Layihə strukturunun qurulması
-- [ ] Komponentlərin planlaşdırılması
+- [x] Layihə strukturunun qurulması
+- [x] Komponentlərin planlaşdırılması
 
 ### Mərhələ 2: Frontend İnkişafı
-- [ ] React və TypeScript quraşdırılması
-- [ ] Tailwind CSS quraşdırılması
-- [ ] Component strukturunun yaradılması
-- [ ] Routing quraşdırılması
+- [x] React və TypeScript quraşdırılması
+- [x] Tailwind CSS quraşdırılması
+- [x] Component strukturunun yaradılması
+- [x] Routing quraşdırılması
 
 ### Mərhələ 3: Səhifələrin Tətbiqi
-- [ ] Daxil ol/Qeydiyyat səhifəsi
+- [x] Daxil ol/Qeydiyyat səhifəsi
+  - [x] Giriş yaparken xəta bildirişi düzəldildi
+  - [x] Şifrə xətası bildirişi təkmilləşdirildi
 - [ ] Dashboard səhifəsi
 - [ ] Hesabat səhifəsi
 - [ ] Parametrlər səhifəsi
 
 ### Mərhələ 4: Funksionallıq
-- [ ] LocalStorage ilə istifadəçi məlumatlarının saxlanması
-- [ ] Çoxdilli dəstək tətbiqi
-- [ ] Açıq/Qaranlıq tema dəstəyi
+- [x] LocalStorage ilə istifadəçi məlumatlarının saxlanması
+- [x] Çoxdilli dəstək tətbiqi
+- [x] Açıq/Qaranlıq tema dəstəyi
 - [ ] Cihaz idarəetmə funksiyası
 
 ### Mərhələ 5: Firebase İnteqrasiyası
@@ -98,6 +100,11 @@ PolyAgro, ağıllı sera cihazlarını idarə etmək üçün nəzərdə tutulmu�
 ### Tema
 - Varsayılan: Açıq tema
 - Alternativ: Qaranlıq tema
+
+### Texnologiya Yeniləmələri
+- Tailwind CSS v3.3.0 (stabillik üçün seçildi)
+- PostCSS v8.4.31
+- Autoprefixer v10.4.14
 
 ### Saxlama
 - İstifadəçi tərcihləri (dil, tema) localStorage-də saxlanılacaq

@@ -46,9 +46,25 @@ const LoginPage: React.FC = () => {
           throw new Error('emailExists');
         }
 
+        if (!validateEmail(email)) {
+          throw new Error('emailInvalid');
+        }
+
+        if (!validatePassword(password)) {
+          throw new Error('passwordInvalid');
+        }
+
         await register(email, password, name);
       } else {
-        await login(email, password);
+        if (!validateEmail(email)) {
+          throw new Error('emailInvalid');
+        }
+
+        try {
+          await login(email, password);
+        } catch (loginErr: any) {
+          throw new Error('invalidCredentials');
+        }
       }
 
       navigate('/dashboard');
@@ -126,8 +142,23 @@ const LoginPage: React.FC = () => {
           </div>
 
           {error && (
-            <div className={`${theme === 'dark' ? 'bg-red-900/50 border-red-800' : 'bg-red-100 border-red-400'} border text-red-700 px-4 py-3 rounded relative mb-4`} role="alert">
-              <span className="block sm:inline">{error}</span>
+            <div 
+              className={`${
+                theme === 'dark' 
+                  ? 'bg-red-900/50 border-red-800 text-red-200' 
+                  : 'bg-red-50 border-red-400 text-red-700'
+              } border px-4 py-3 rounded-md relative mb-4 flex items-center shadow-sm`} 
+              role="alert"
+            >
+              <i className={`ri-error-warning-line text-lg mr-2 ${theme === 'dark' ? 'text-red-300' : 'text-red-500'}`}></i>
+              <span className="block sm:inline font-medium">{error}</span>
+              <button 
+                onClick={() => setError('')}
+                className="absolute top-0 bottom-0 right-0 px-4 py-3"
+                aria-label="Kapat"
+              >
+                <i className={`ri-close-line ${theme === 'dark' ? 'text-red-300' : 'text-red-500'}`}></i>
+              </button>
             </div>
           )}
 

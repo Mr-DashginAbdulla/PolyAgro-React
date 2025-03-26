@@ -32,7 +32,7 @@ const resources = {
       "passwordInvalid": "Şifrə ən az 8 simvol, 1 böyük hərf, 1 kiçik hərf və 1 rəqəm olmalıdır",
       "passwordMismatch": "Şifrələr uyğun gəlmir",
       "emailExists": "Bu e-poçt artıq istifadə olunur",
-      "invalidCredentials": "Yanlış e-poçt və ya şifrə"
+      "invalidCredentials": "Yanlış e-poçt və ya şifrə. Yenidən cəhd edin."
     }
   },
   en: {
@@ -56,7 +56,7 @@ const resources = {
       "passwordInvalid": "Password must contain at least 8 characters, 1 uppercase, 1 lowercase and 1 number",
       "passwordMismatch": "Passwords do not match",
       "emailExists": "This email is already in use",
-      "invalidCredentials": "Invalid email or password"
+      "invalidCredentials": "Invalid email or password. Please try again."
     }
   },
   ru: {
@@ -80,7 +80,7 @@ const resources = {
       "passwordInvalid": "Пароль должен содержать минимум 8 символов, 1 заглавную букву, 1 строчную букву и 1 цифру",
       "passwordMismatch": "Пароли не совпадают",
       "emailExists": "Эта эл. почта уже используется",
-      "invalidCredentials": "Неверная эл. почта или пароль"
+      "invalidCredentials": "Неверная эл. почта или пароль. Пожалуйста, попробуйте еще раз."
     }
   }
 };
